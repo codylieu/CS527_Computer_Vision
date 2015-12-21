@@ -1,0 +1,7 @@
+*.m~
+.DS_Store
+Output/
+template.s*
+template.aux*
+template.log*
+template.out*

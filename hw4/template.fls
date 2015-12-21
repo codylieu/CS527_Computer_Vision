@@ -1,0 +1,10 @@
+PWD /Users/yixin/dev/school/fa2015/cs527/hw4
+INPUT /usr/local/texlive/2015basic/texmf.cnf
+INPUT /usr/local/texlive/2015basic/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2015basic/texmf-var/web2c/pdftex/latex.fmt
+INPUT template.tex
+OUTPUT template.log
+INPUT /usr/local/texlive/2015basic/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2015basic/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2015basic/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2015basic/texmf-dist/tex/latex/base/size10.clo

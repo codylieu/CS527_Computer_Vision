@@ -1,0 +1,240 @@
+\documentclass{article}
+
+\newif\ifstays
+\staysfalse                  % Change this to \staysfalse to make all sample text disappear
+
+\usepackage{fullpage} % Makes the text margins smaller
+\usepackage{graphicx} % To include figures
+\usepackage{fancyvrb} % Includes the \VerbatimInput command to read in code files
+
+\author{Cody Lieu}
+\title{COMPSCI 527 Homework 1}
+
+\begin{document}
+\maketitle
+
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+\noindent [Please remove all the extra stuff below from the \verb#.tex# file before you hand in the resulting PDF file. However, please leave section headers and \verb#\newline# commands where they are. It is OK to add \verb#\newline# commands if you find that useful, but do so sparingly.
+
+There are two ways to remove this extra stuff. One is to do so physically (look for matching \texttt{START/END}
+comments), the other is to change the string \verb#\staystrue# close to the beginning of the file to \verb#\staysfalse#
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(a)}
+
+$r_{Mf} = (r_A+r_H-1)(c_A+c_H-1)$\\
+$c_{Mf} = r_A(c_A)$
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+You can say \verb#Mf# for text that looks like code, or $M_f$ for something that looks more math-like.
+
+Keep in mind that the \verb#\verb# command lets you introduce all sorts of special characters, and so does the \verb#verbatim# environment.
+
+The \verb#\verb# command is the only command that lets you decide what (matching) delimiters to use for its argument. You say \verb$\verb#!@%^&*(){}#$ to obtain \verb#!@%^&*(){}#, but if you want to 
+include a \verb$#$ you need a different delimiter, say \verb@\verb$#$@. You can use any character you like as a delimiter, as long as it is not also inside the argument, and as long as opening and closing delimiter are the same.
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(b)}
+
+\[
+    \input{Mf}
+\]
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+Here is how you would write a $4\times 4$ identity matrix if you leave the zero entries blank:
+\[
+I = \left[\begin{array}{*{4}c}
+ 1 &  &  & \\
+ & 1 &  & \\
+ &  & 1 & \\
+ &  &  & 1
+\end{array}\right]
+\]
+
+Alternatively, you could use the following code (also contained in the \verb#latexArray.m# file with this assignment)
+
+\VerbatimInput[xleftmargin=10mm,fontshape=tt,fontsize=\small]{latexArray.m}
+
+and call it as follows:
+\begin{verbatim}
+    latexArray(eye(4), 'I', 'I.tex', '%d')
+\end{verbatim}
+The last argument says that you expect the entries to be integers; you could use \verb#'%g'# for floating-point numbers. You would then include the file \verb#I.tex# produced by \textsc{Matlab} with the \textsc{LaTeX} command.
+
+[Look at the \verb#.tex# file, and you will see that two different methods were used to include the longer piece of code and the shorter snippet above. Which method you use is a matter of convenience.]F
+
+\begin{verbatim}
+\[
+    \input{I}
+\]
+\end{verbatim}
+which shows up as follows:
+\[
+    \input{I}
+\]
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(c)}
+
+$r_{Ms} = r_A(c_A)$\\
+$c_{Ms} = r_A(c_A)$
+
+\section*{Problem 1(d)}
+
+\[
+    \input{Ms}
+\]
+
+\section*{Problem 1(e)}
+
+\VerbatimInput[xleftmargin=10mm,fontshape=tt,fontsize=\small]{convMatrix.m}
+
+\section*{Problem 1(f)}
+
+\[
+    \input{1}
+    \input{2}
+\]
+
+\[
+    \input{3}
+    \input{4}
+\]
+
+\[
+    \input{5}
+    \input{6}
+\]
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+Here is the code snippet in case you want to cut and paste:
+\begin{verbatim}
+C = [1 1; 1 2; 2 1; 2 2; 3 2; 3 3];
+M = cell(size(C, 1), 1);
+for k = 1:size(C, 1)
+    M{k} = convMatrix(reshape(1:prod(C(k, :)), C(k, :)), [2 3], 'same');
+    latexArray(M{k}, sprintf('M\\{%d\\}', k), sprintf('../M%d.tex', k), '%d');
+end
+\end{verbatim}
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(g)}
+
+reshape(convMatrix(H, size(A), 'same')*A(:), size(A));
+
+\section*{Problem 1(h)}
+
+H = reshape(1:6, [2 3]);\\
+A = reshape(1:12, [3 4]);\\\\
+S = conv2(A, H, 'same');\\
+S2 = reshape(convMatrix(H, size(A), 'same')*A(:), size(A));\\\\
+
+\[
+    \input{S}
+    \input{S2}
+\]
+
+\newpage
+\section*{Problem 2(a)}
+
+\[
+K = \frac{1}{8}\left[\begin{array}{*{3}c}
+ 1 & 0 & -1\\
+ 2 & 0 & -2\\
+ 1 & 0 & -1
+\end{array}\right]
+\]
+
+A two-dimensional filter kernel is separable if it can be expressed as the outer product of two vectors.
+
+\[
+K = \Bigg(\frac{1}{4}\left[\begin{array}{*{3}c}
+ 1\\
+ 2\\
+ 1
+\end{array}\right]\Bigg)
+\Bigg(\frac{1}{2}\left[\begin{array}{*{3}c}
+ 1 & 0 & -1
+\end{array}\right]\Bigg)
+\]
+
+\[
+K_1 = \frac{1}{4}\left[\begin{array}{*{3}c}
+ 1\\
+ 2\\
+ 1
+\end{array}\right]
+K_2 = \frac{1}{2}\left[\begin{array}{*{3}c}
+ 1 & 0 & -1
+\end{array}\right]
+\]
+
+The matrix product of a column vector and row vector is equivalent to the two-dimensional convolution of the two vectors. Therefore:\\
+
+$K = K_1K_2 = K_1 \ast K_2$
+
+\section*{Problem 2(b)}
+
+The Sobel operator approximates a horizontal gradient and a vertical gradient. K can be decomposed into the product of K1 (a 3x1 matrix) and K2 (a 1x3 matrix).
+Convolving with K1 smoothes/averages the image perpendicular to the derivative direction.
+K2 is the differentiating operator and convolving with K2 approximates the differentiation of the underlying continuous intensity function of the image. The result of convolving an image with K2 and then K1 is a gradient vector G for each discrete image point, which can be used to calculate the magnitude and direction of the vector.
+
+\section*{Problem 2(c)}
+
+\[
+    \input{4MK1}
+\]
+
+\[
+    \input{2MK2}
+\]
+
+\section*{Problem 2(d)}
+
+$M_k = M_{k1} \ast M_{k2} = M_{k2} \ast M_{k1}$
+
+\section*{Problem 2(e)}
+
+The square matrices $M_s$ have the special property that they are separable.
+
+\newpage
+\section*{Problem 3(a)}
+
+\VerbatimInput[xleftmargin=10mm,fontshape=tt,fontsize=\small]{blockPyramid.m}
+
+\section*{Problem 3(b)}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{p.png}
+\end{center}
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+Here is the image \verb#wave.png#. Do \emph{not} include this with what you hand in. The image is here just so you see how to include images in a \textsc{LaTeX} file. Adjust the width in the \verb#\includegraphics# command for a pleasing result, and note the use of the \verb#center# environment to put the image in the center.
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{wave.png}
+\end{center}
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 3(c)}
+
+\VerbatimInput[xleftmargin=10mm,fontshape=tt,fontsize=\small]{gMag.m}
+
+\section*{Problem 3(d)}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{gp.png}
+\end{center}
+
+\end{document}

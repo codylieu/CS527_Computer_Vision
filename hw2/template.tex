@@ -1,0 +1,476 @@
+\documentclass{article}
+
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.05\textwidth}\rlap{#1}}
+
+
+\newif\ifstays
+\staysfalse                  % Change this to \staysfalse to make all sample text disappear
+
+\usepackage{fullpage} % Makes the text margins smaller
+\usepackage{graphicx} % To include figures
+\usepackage{fancyvrb} % Includes the \VerbatimInput command to read in code files
+
+\usepackage{url}
+\usepackage{hyperref}
+
+\author{Yixin Lin, Cody Lieu}
+\title{COMPSCI 527 Homework 2}
+
+% A very simple environment for writing pseudo-code
+\newenvironment{pgm}{
+  \begin{center}\begin{tabbing}
+  xx \= xx \= xx \= xx \= xx \= xx \= xx \= xx \= xx \= xx \= xx \= \kill\>\+}{
+  \end{tabbing}\end{center}}
+
+\begin{document}
+\maketitle
+
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+\noindent [Please remove all the extra stuff below from the \verb#.tex# file before you hand in the resulting PDF file. However, please leave section headers and \verb#\newline# commands where they are. It is OK to add \verb#\newline# commands if you find that useful, but do so sparingly.
+
+There are two ways to remove this extra stuff. One is to do so physically (look for matching \texttt{START/END}
+comments), the other is to change the string \verb#\staystrue# close to the beginning of the file to \verb#\staysfalse#
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(a)}
+
+\[
+A_0 = \left[\begin{array}{*{4}c}
+ 1 & 0 & 1 \\
+ 0 & 1 & 0 \\
+ 1 & 1 & 0
+ 
+ \end{array}\right]
+\]
+
+
+$$ \mathbf{q_1} = \frac{\mathbf{a_1}}{|\mathbf{a_1}|} =  \left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{2}}{2} \\
+    0 \\
+    \frac{\sqrt{2}}{2} \\
+\end{array}\right]
+$$
+
+$$ \mathbf{q_2} = normalized(\mathbf{a_2} - proj_{\mathbf{q_1}}\mathbf{a2}) =  \left[ \begin{array} {*{3}c} 
+    -\frac{\sqrt{6}}{6} \\
+    \frac{\sqrt{6}}{3} \\
+    \frac{\sqrt{6}}{6} \\
+\end{array}\right]
+$$
+
+$$ \mathbf{q_3} = normalized(\mathbf{a_3} - proj_{\mathbf{q_1}}\mathbf{a3} -
+proj_{\mathbf{q_2}}\mathbf{a3}) =  \left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{3}}{3} \\
+    \frac{\sqrt{3}}{3} \\
+    - \frac{\sqrt{3}}{3} \\
+\end{array}\right]
+$$
+
+\[
+Q = \left[\begin{array}{*{4}c}
+    \frac{\sqrt{2}}{2} & -\frac{\sqrt{6}}{6} & \frac{\sqrt{3}}{3} \\
+    0 & \frac{\sqrt{6}}{3} & \frac{\sqrt{3}}{3} \\
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{6}}{6} & - \frac{\sqrt{3}}{3}
+
+ \end{array}\right]
+\]
+
+
+\section*{Problem 1(b)}
+
+$$|\mathbf{q_1}| = \sqrt{(\frac{\sqrt{2}}{2})^2 +
+    0^2 +
+    (\frac{\sqrt{2}}{2})^2 } = 1$$
+
+$$|\mathbf{q_2}| = \sqrt{(-\frac{\sqrt{6}}{6})^2 +
+    (\frac{\sqrt{6}}{3})^2 +
+    (\frac{\sqrt{6}}{6})^2 } = 1$$
+
+
+$$|\mathbf{q_2}| = \sqrt{(\frac{\sqrt{3}}{3})^2 +
+    (\frac{\sqrt{3}}{3})^2 +
+    (-\frac{\sqrt{3}}{3} } = 1$$
+
+
+$$
+\mathbf{q_1} \cdot \mathbf{q_2} = 
+\left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{2}}{2} \\
+    0 \\
+    \frac{\sqrt{2}}{2} \\
+\end{array}\right] 
+\cdot 
+\left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{3}}{3} \\
+    \frac{\sqrt{3}}{3} \\
+    - \frac{\sqrt{3}}{3} \\
+\end{array}\right]
+= \mathbf{0}
+$$
+
+$$
+\mathbf{q_2} \cdot \mathbf{q_3} = 
+\left[ \begin{array} {*{3}c} 
+    -\frac{\sqrt{6}}{6} \\
+    \frac{\sqrt{6}}{3} \\
+    \frac{\sqrt{6}}{6} \\
+\end{array}\right] 
+\cdot 
+\left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{3}}{3} \\
+    \frac{\sqrt{3}}{3} \\
+    - \frac{\sqrt{3}}{3} \\
+\end{array}\right]
+= \mathbf{0}
+$$
+
+$$
+\mathbf{q_1} \cdot \mathbf{q_3} = 
+\left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{2}}{2} \\
+    0 \\
+    \frac{\sqrt{2}}{2} \\
+\end{array}\right] 
+\cdot 
+\left[ \begin{array} {*{3}c} 
+    \frac{\sqrt{3}}{3} \\
+    \frac{\sqrt{3}}{3} \\
+    - \frac{\sqrt{3}}{3} \\
+\end{array}\right]
+= \mathbf{0}
+$$
+
+\section*{Problem 1(c)}
+
+$r$ is equal to the rank of the matrix $A$.
+
+\section*{Problem 1(d)}
+
+Yes, since Gram-Schmidt gives us an orthogonal basis for the column space when applied to the column vectors in $A$, it gives us the dimension of the column space, which is equal to the rank.
+
+\section*{Problem 1(e)}
+
+First, apply Gram-Schmidt on the set of column vectors of A; then add $\mathbf{b}$ to the set and continue. If adding $\mathbf{b}$ increased the number of orthogonormal vectors, that means there is no solution (i.e. there is no linear combination of basis vectors of the column space of A that equals $\mathbf{b}$). Otherwise, $\mathbf{b}$ is a linear combination of the column vectors of A, and there exists a solution.
+
+% $Q$ forms a basis for the vector space $A$. This means that if a solution exists to $A\mathbf{x}=\mathbf{b}$, then $\mathbf{b}$ can be expressed as a linear combination of the orthonormal vectors in $Q$, i.e. if a solution exists to the linear system $Q\mathbf{x'}=\mathbf{b}$, where $\mathbf{x'}$ is a r-by-1 vector of constants (not necessarily satisfying $A\mathbf{x}=\mathbf{b}$), then a solution exists to $A\mathbf{x}=\mathbf{b}$.
+
+\section*{Problem 1(f)}
+
+
+$$ r_{ij} = \mathbf{q_i} \cdot \mathbf{a_j} $$
+
+$$ r_{jj} = |\mathbf{a_j'}|$$
+
+\section*{Problem 1(g)}
+
+\[
+R = \left[\begin{array}{*{4}c}
+ \ast & \ast  & \ast & \ast\\
+ & \ast & \ast & \ast\\
+ &  & \ast &\ast \\
+ &  &  & \ast
+\end{array}\right]
+\]
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+Here is how you would write the fill pattern for a $4\times 4$ identity matrix:
+\[
+I = \left[\begin{array}{*{4}c}
+ \ast &  &  & \\
+ & \ast &  & \\
+ &  & \ast & \\
+ &  &  & \ast
+\end{array}\right]
+\]
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 1(h)}
+
+\[
+Q = \left[\begin{array}{*{4}c}
+ \mathbf{q_1} & \mathbf{q_2}  & \mathbf{q_3}\\
+\end{array}\right]
+\]
+
+\[
+R = \left[\begin{array}{*{4}c}
+ \ast & \ast  & \ast & \ast\\
+ & \ast & \ast & \ast\\
+ &  &  &\ast  \\
+\end{array}\right]
+\]
+
+In the third iteration of the \verb#for# loop, the \verb#if# statement fails and therefore $r$ is not incremented. The total number of columns in $q$ is $r$, so there is one less column in $Q$. This makes sense, since $Q$ should be an orthogonal matrix whose column space is the same as $A$; if $A$ has linearly dependent vectors, then the number of column vectors in $Q$ will be reduced.
+
+$r_{jj} = |\mathbf{a_j'}| = 0$, so the last element in the diagonal will be 0.
+
+\section*{Problem 1(i)}
+
+$$Q_{m \times r}$$
+$$R_{r \times n}$$
+
+\section*{Problem 1(j)}
+
+\begin{verbatim}
+function [Q, R] = gs(A)
+
+Q = [];
+R = [];
+
+r = 0;
+for j = 1:size(A, 2)
+    ap = A(:, j);
+    for i = 1:r
+        R(i, j) = dot(Q(:, i), A(:, j));
+        ap = ap - R(i, j).*Q(:, i);
+    end
+    rjj = norm(ap);
+    if rjj > sqrt(eps)
+        r = r + 1;
+        R(r,j) = rjj;
+        Q(:, r) = ap/rjj;
+    end
+end
+\end{verbatim}
+
+\section*{Problem 1(k)}
+
+\begin{verbatim}
+function [Q, R] = ggs(A, Q, R)
+
+if nargin < 3 || isempty(Q) || isempty(R)
+    Q = [];
+    R = [];
+end
+
+[m, n] = size(A);
+[r0, n0] = size(R);
+
+if ~isempty(Q) && size(Q, 1) ~= m
+    error('A and Q have inconsistent row sizes')
+end
+
+if ~isempty(Q) && size(Q, 2) ~= r0
+    error('Q and R have inconsistent sizes')
+end
+
+[qr, qc] = size(Q);
+
+% Your code here
+r = qc;
+for j = 1+qc:n+qc
+    ap = A(:, j-qc);
+    for i = 1:r
+        R(i, j) = dot(Q(:, i), A(:, j-qc));
+        ap = ap - R(i, j).*Q(:, i);
+    end
+    rjj = norm(ap);
+    if rjj > sqrt(eps)
+        r = r + 1;
+        R(r,j) = rjj;
+        Q(:, r) = ap/rjj;
+    end
+end
+\end{verbatim}
+
+\section*{Problem 2(a)}
+
+$$ \mathbf{c} = Q^{-1}\mathbf{b} = Q^{T}\mathbf{b}$$
+
+\section*{Problem 2(b)}
+
+Since $Q$ is an orthogonal matrix, $Q^{-1} = Q^{T}$. Therefore, we don't require the expensive computation of determining the inverse of $Q$ and can instead take the transpose (which is very efficient).
+
+\section*{Problem 2(c)}
+
+Since $R$ is a triangular matrix, apply the algorithm of backward substitution pseudo-coded below:
+%\\\\
+% x = new arr[n]\\
+% for i = n to 1
+
+% \itab{x[i] = c[i]}
+
+% \itab{for j = i + 1 to n}
+
+% \tab{x[i] = x[i] - x[j] * R[i][j]}
+
+% \itab{end}
+
+% \itab{x[i] = x[i] / R[i][i]}\\
+% end
+
+\begin{verbatim}
+x = zeros(i,1);
+for i = n:-1:1
+    x(i) = c(i);
+    for j = i+1:cR
+        x(i) = x(i) - x(j)*R(i, j);
+    end
+    x(i) = x(i)/R(i, i);
+end
+\end{verbatim}
+
+%%% START OF TEXT TO REMOVE
+\ifstays
+Here is one way to render the Gram-Schmidt pseudo-code in \LaTeX. You can use this as a template to write your own pseudo-code.
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bq}{\mathbf{q}}
+\begin{pgm}
+\mbox{}\+\+\+\+\\
+$r = 0$\\
+for $j=1$ to $n$\+\\
+$\ba'_{j} = \ba_{j} - \sum_{i=1}^{r} (\bq_{i}^{T}\ba_{j})\bq_{i}$\\
+if $\|\ba'_{j}\| \neq \mathbf{0}$\+\\
+  $r = r+1$\\
+  $\bq_{r} = \frac{\ba'_{j}}{\|\ba'_{j}\|}$\-\\
+end\-\\
+end
+\end{pgm}
+The \verb#\+# and \verb#\-# commands tell the interpreter respectively to add or remove one indentation tab from subsequent lines. The \texttt{pgm} environment is defined for you in the preamble of the \verb#template.tex# file.
+\fi
+%%% END OF TEXT TO REMOVE
+
+\section*{Problem 2(d)}
+
+Since some columns of A are linearly independent, the solution has free variables. In order to pick one solution, pick a free variable at random and then back-substitute.
+
+In the code below, we first compute the pivot columns (which are fixed), and we set the free variables to 0. We check if we're on a free column, and if we are we simply ignore it.
+
+\begin{verbatim}
+
+pivotColumns = [];
+for rC = 1:size(R, 2)
+    for rR = rC:size(R, 1)
+        if abs(R(rR,rC)) > sqrt(eps)
+            pivotColumns = [pivotColumns rC];
+            break;
+        end
+    end
+end
+cR = size(R, 2);
+i = cR;
+x = zeros(i,1);
+while i > 0
+    if ismember(i,pivotColumns)
+        x(i) = c(i);
+        for j = i+1:cR
+            x(i) = x(i) - x(j)*R(i, j);
+        end
+        x(i) = x(i)/R(i, i);
+    else
+        x(i) = 0;
+    end
+    i = i-1;
+end
+
+\end{verbatim}
+
+\section*{Problem 2(e)}
+
+Since $leftnull(A) = range(A)^{\perp}$, we can find a basis of $R^m$ by using the identity matrix as A and keeping Q and R. Then we remove the vectors that were already in Q to find a basis for the orthogonal complement of $range(A)$.
+
+This works because we know that the identity matrix of size m is definitely a basis for $R^M$, so using \verb#ggs# on it allows us to definitely get a basis of $R^M$ by adding vectors onto $Q$.
+
+\begin{verbatim}
+[m, n] = size(Q);
+[Qn, Rn] = ggs(eye(m), Q, R);
+L = Qn(:, n+1:end);
+\end{verbatim}
+
+\section*{Problem 2(f)}
+
+% Q and R come from ggs; L come from 2e. N and W come from ggs of $A^T$. $x$ can be gotten from 2(a-d).
+% Are there better ways to get N and W?
+
+\begin{verbatim}
+function [x, N, W, L, Q, R] = solve(A, b)
+
+[Q, R] = ggs(A, [], []);
+
+[m, n] = size(Q);
+[Qn, Rn] = ggs(eye(m), Q, R);
+L = Qn(:, n+1:end);
+
+
+[W, Rw] = ggs(A', [], []);
+
+[r, col] = size(W);
+[Qw, Rw] = ggs(eye(r), W, Rw);
+N = Qw(:, col+1:end);
+
+Q
+b
+
+c = Q'*b;
+
+pivotColumns = [];
+for rC = 1:size(R, 2)
+    for rR = rC:size(R, 1)
+        if abs(R(rR,rC)) > sqrt(eps)
+            pivotColumns = [pivotColumns rC];
+            break;
+        end
+    end
+end
+
+
+[Qb, Rb] = ggs(b, Q, R)
+if ~isequal(Qb, Q)
+    x = []
+else
+    cR = size(R, 2);
+    i = cR;
+    x = zeros(i,1);
+    while i > 0
+        if ismember(i,pivotColumns)
+            x(i) = c(i);
+            for j = i+1:cR
+                x(i) = x(i) - x(j)*R(i, j);
+            end
+            x(i) = x(i)/R(i, i);
+        else
+            x(i) = 0;
+        end
+        i = i-1;
+    end
+end
+
+end
+\end{verbatim}
+
+\section*{Problem 2(g)}
+
+% Rank < n
+The system in eq. 3 admits infinitely many solutions if the rank of A is less than the number of columns in A (i.e. \verb#size(Q,2) < size(A,2)#) and x exists (i.e. \verb#x~=[]#).
+
+The set of solutions is $ \mathbf{n} + \mathbf{x}$, $ \forall n \in N $. This is the set of vectors in $N$, shifted by $\mathbf{x}$, which is an \textbf{affine space}.
+
+This is true because of the following theorem, taken verbatim from \textbf{\href{https://www.math.stonybrook.edu/~badger/mat211f12/solver2.pdf}{this link from Stony Brook}}:
+
+\subsubsection*{Theorem}
+
+Let $x_p$ be a $particular $ $solution$ to $Ax = b$. Then the $general$ $ solution$ to $Ax = b$ is given by $x_p + x_n$ where $x_n$ is a vector in the nullspace of $A$.
+
+
+% In this case, the set of solutions to the system $R\mathbf{x}=\mathbf{c}$ can be defined precisely by the space spanned by null(A). null(A) is a vector space.
+
+\section*{Problem 2(h)}
+
+% Check that every inner product between a pair of vectors is 0
+
+Check that $\mathbf{n} \cdot \mathbf{w} = \mathbf{0}$ $ \forall \mathbf{n} \in N$, $ \forall \mathbf{w} \in W$. Equivalently, \verb#~any(N.' * W)  # (Replace N and W with L and Q respectively, to check for L and Q.)
+
+\section*{Problem 2(i)}
+
+See next page.
+
+\input{tests} % Uncomment this line to include your test results, which will show up on a fresh page
+
+
+\end{document}
